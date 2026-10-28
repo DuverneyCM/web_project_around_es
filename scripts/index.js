@@ -1,5 +1,6 @@
 //alert("connected!");
 console.log("connected!");
+
 let initialCards = [
   {
     name: "Valle de Yosemite",

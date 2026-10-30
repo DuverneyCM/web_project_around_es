@@ -70,7 +70,7 @@ function handleProfileFormSubmit(evt) {
 
 profileEditButton.addEventListener("click", handleOpenEditModal);
 closeButtonEditPopup.addEventListener("click", () => closeModal(editPopup));
-submitButtonFormEditPopup.addEventListener("click", handleProfileFormSubmit);
+submitButtonFormEditPopup.addEventListener("submit", handleProfileFormSubmit);
 
 /* Others useful class names for futures tasks
 profile__add-button

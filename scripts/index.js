@@ -70,7 +70,7 @@ function handleProfileFormSubmit(evt) {
 
 profileEditButton.addEventListener("click", handleOpenEditModal);
 closeButtonEditPopup.addEventListener("click", () => closeModal(editPopup));
-submitButtonFormEditPopup.addEventListener("submit", handleProfileFormSubmit);
+formEditPopup.addEventListener("submit", handleProfileFormSubmit);
 
 // Generate Cards Dinamically
 const cardTemplate = document.querySelector("#card-template");
@@ -81,8 +81,8 @@ initialCards.forEach((card) => {
 });
 
 function renderCard(name, link, container) {
-  container.append(getCardElement(name, link));
-  //cardTemplate.after(getCardElement(name, link));
+  container.prepend(getCardElement(name, link)); //append
+  //cardTemplate.after(getCardElement(name, link)); // before
 }
 
 function getCardElement(
@@ -100,16 +100,43 @@ function getCardElement(
   cardTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = alt;
+
   //cardDeleteButton.addEventListener("click", handleCardDeleteButton);
   //cardLikeButton.addEventListener("click", handleCardLikeButton);
 
   return cardClone;
 }
 
-/* Others useful class names for futures tasks
-profile__add-button
-card__delete-button
-card__like-button
-popup__close 
-popup__button
-*/
+// Add new cards' pop-up
+const profileAddButton = document.querySelector(".profile__add-button");
+const newCardPopup = document.querySelector("#new-card-popup");
+const closeButtonNewCardPopup = newCardPopup.querySelector(".popup__close");
+const formNewCardPopup = newCardPopup.querySelector("#new-card-form");
+const nameInputFormNewCardPopup = formNewCardPopup.querySelector(
+  ".popup__input_type_card-name",
+);
+const urlInputFormNewCardPopup = formNewCardPopup.querySelector(
+  ".popup__input_type_url",
+);
+const submitButtonFormNewCardPopup =
+  formNewCardPopup.querySelector(".popup__button");
+
+profileAddButton.addEventListener("click", handleOpenNewCardModal); //
+function handleOpenNewCardModal() {
+  //fillProfileForm();
+  openModal(newCardPopup);
+}
+closeButtonNewCardPopup.addEventListener("click", handleCloseNewCardModal); //
+function handleCloseNewCardModal() {
+  closeModal(newCardPopup);
+}
+formNewCardPopup.addEventListener("submit", handleCardFormSubmit);
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
+  const name = nameInputFormNewCardPopup.value;
+  const url = urlInputFormNewCardPopup.value;
+  initialCards.push({ name, url });
+  renderCard(name, url, cardsList);
+  closeModal(newCardPopup);
+  formNewCardPopup.reset();
+}

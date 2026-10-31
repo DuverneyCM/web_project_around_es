@@ -101,8 +101,12 @@ function getCardElement(
   cardImage.src = link;
   cardImage.alt = alt;
 
-  //cardDeleteButton.addEventListener("click", handleCardDeleteButton);
-  //cardLikeButton.addEventListener("click", handleCardLikeButton);
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("card__like-button_is-active");
+  });
+  cardDeleteButton.addEventListener("click", () => {
+    cardClone.remove();
+  });
 
   return cardClone;
 }

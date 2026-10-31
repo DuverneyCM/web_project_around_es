@@ -1,6 +1,3 @@
-//alert("connected!");
-//console.log("connected!");
-
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -27,10 +24,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
   },
 ];
-
-initialCards.forEach((element) => {
-  console.log(element.name);
-});
 
 // Edit PopUp
 const profileTitle = document.querySelector(".profile__title");
@@ -75,6 +68,10 @@ formEditPopup.addEventListener("submit", handleProfileFormSubmit);
 // Generate Cards Dinamically
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
+const cardImagePopup = document.querySelector("#image-popup");
+const closeButtonImagePopup = cardImagePopup.querySelector(".popup__close");
+const imageImagePopup = cardImagePopup.querySelector(".popup__image");
+const captionImagePopup = cardImagePopup.querySelector(".popup__caption");
 
 initialCards.forEach((card) => {
   renderCard(card.name, card.link, cardsList);
@@ -91,7 +88,6 @@ function getCardElement(
   alt = name,
 ) {
   const cardClone = cardTemplate.content.querySelector(".card").cloneNode(true);
-  //const cardClone = cardTemplate.content.cloneNode(true); // se puede clonar el template.content directamente
   const cardTitle = cardClone.querySelector(".card__title");
   const cardImage = cardClone.querySelector(".card__image");
   const cardDeleteButton = cardClone.querySelector(".card__delete-button");
@@ -106,6 +102,15 @@ function getCardElement(
   });
   cardDeleteButton.addEventListener("click", () => {
     cardClone.remove();
+  });
+
+  cardImage.addEventListener("click", () => {
+    openModal(cardImagePopup);
+    imageImagePopup.src = link;
+    captionImagePopup.textContent = alt;
+  });
+  closeButtonImagePopup.addEventListener("click", () => {
+    closeModal(cardImagePopup);
   });
 
   return cardClone;
@@ -127,7 +132,6 @@ const submitButtonFormNewCardPopup =
 
 profileAddButton.addEventListener("click", handleOpenNewCardModal); //
 function handleOpenNewCardModal() {
-  //fillProfileForm();
   openModal(newCardPopup);
 }
 closeButtonNewCardPopup.addEventListener("click", handleCloseNewCardModal); //

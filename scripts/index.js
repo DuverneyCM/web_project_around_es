@@ -77,15 +77,17 @@ const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 
 initialCards.forEach((card) => {
-  cardTemplate.after(getCardElement(card.name, card.link));
-  //cardsList.append(getCardElement(card.name, card.link));
+  renderCard(card.name, card.link, cardsList);
 });
 
-function renderCard(name, link, container) {}
+function renderCard(name, link, container) {
+  container.append(getCardElement(name, link));
+  //cardTemplate.after(getCardElement(name, link));
+}
 
 function getCardElement(
-  name = "myCard",
-  link = "images/placeholder.jpg",
+  name = "Sin título",
+  link = "./images/placeholder.jpg",
   alt = name,
 ) {
   const cardClone = cardTemplate.content.querySelector(".card").cloneNode(true);

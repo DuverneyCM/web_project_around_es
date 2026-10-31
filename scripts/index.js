@@ -1,5 +1,5 @@
 //alert("connected!");
-console.log("connected!");
+//console.log("connected!");
 
 const initialCards = [
   {
@@ -71,6 +71,38 @@ function handleProfileFormSubmit(evt) {
 profileEditButton.addEventListener("click", handleOpenEditModal);
 closeButtonEditPopup.addEventListener("click", () => closeModal(editPopup));
 submitButtonFormEditPopup.addEventListener("submit", handleProfileFormSubmit);
+
+// Generate Cards Dinamically
+const cardTemplate = document.querySelector("#card-template");
+const cardsList = document.querySelector(".cards__list");
+
+initialCards.forEach((card) => {
+  cardTemplate.after(getCardElement(card.name, card.link));
+  //cardsList.append(getCardElement(card.name, card.link));
+});
+
+function renderCard(name, link, container) {}
+
+function getCardElement(
+  name = "myCard",
+  link = "images/placeholder.jpg",
+  alt = name,
+) {
+  const cardClone = cardTemplate.content.querySelector(".card").cloneNode(true);
+  //const cardClone = cardTemplate.content.cloneNode(true); // se puede clonar el template.content directamente
+  const cardTitle = cardClone.querySelector(".card__title");
+  const cardImage = cardClone.querySelector(".card__image");
+  const cardDeleteButton = cardClone.querySelector(".card__delete-button");
+  const cardLikeButton = cardClone.querySelector(".card__like-button");
+
+  cardTitle.textContent = name;
+  cardImage.src = link;
+  cardImage.alt = alt;
+  //cardDeleteButton.addEventListener("click", handleCardDeleteButton);
+  //cardLikeButton.addEventListener("click", handleCardLikeButton);
+
+  return cardClone;
+}
 
 /* Others useful class names for futures tasks
 profile__add-button

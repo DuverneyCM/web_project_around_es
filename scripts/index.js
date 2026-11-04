@@ -38,7 +38,6 @@ const nameInputFormEditPopup = formEditPopup.querySelector(
 const descriptionInputFormEditPopup = formEditPopup.querySelector(
   ".popup__input_type_description",
 );
-const submitButtonFormEditPopup = formEditPopup.querySelector(".popup__button");
 
 function openModal(modal) {
   modal.classList.add("popup_is-opened");
@@ -78,8 +77,7 @@ initialCards.forEach((card) => {
 });
 
 function renderCard(name, link, container) {
-  container.prepend(getCardElement(name, link)); //append
-  //cardTemplate.after(getCardElement(name, link)); // before
+  container.prepend(getCardElement(name, link));
 }
 
 function getCardElement(
@@ -107,14 +105,16 @@ function getCardElement(
   cardImage.addEventListener("click", () => {
     openModal(cardImagePopup);
     imageImagePopup.src = link;
-    captionImagePopup.textContent = alt;
-  });
-  closeButtonImagePopup.addEventListener("click", () => {
-    closeModal(cardImagePopup);
+    imageImagePopup.alt = alt;
+    captionImagePopup.textContent = name;
   });
 
   return cardClone;
 }
+
+closeButtonImagePopup.addEventListener("click", () => {
+  closeModal(cardImagePopup);
+});
 
 // Add new cards' pop-up
 const profileAddButton = document.querySelector(".profile__add-button");
@@ -127,8 +127,6 @@ const nameInputFormNewCardPopup = formNewCardPopup.querySelector(
 const urlInputFormNewCardPopup = formNewCardPopup.querySelector(
   ".popup__input_type_url",
 );
-const submitButtonFormNewCardPopup =
-  formNewCardPopup.querySelector(".popup__button");
 
 profileAddButton.addEventListener("click", handleOpenNewCardModal); //
 function handleOpenNewCardModal() {
@@ -143,7 +141,6 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const name = nameInputFormNewCardPopup.value;
   const url = urlInputFormNewCardPopup.value;
-  initialCards.push({ name, url });
   renderCard(name, url, cardsList);
   closeModal(newCardPopup);
   formNewCardPopup.reset();

@@ -69,19 +69,35 @@
             type="button"
           ></button>
           <h3 class="popup__title">Editar perfil</h3>
-          <form class="popup__form" id="edit-profile-form">
-            <input
-              class="popup__input popup__input_type_name"
-              name="name"
-              placeholder="Nombre"
-              type="text"
-            />
-            <input
-              class="popup__input popup__input_type_description"
-              name="description"
-              placeholder="Acerca de mí"
-              type="text"
-            />
+          <form class="popup__form" id="edit-profile-form" novalidate>
+            <label class="popup__field" for="edit-profile-form__name">
+              <input
+                class="popup__input popup__input_type_name"
+                id="edit-profile-form__name"
+                name="name"
+                placeholder="Nombre"
+                type="text"
+                minlength="2"
+                maxlength="40"
+                required
+            /></label>
+            <span class="popup__error" id="edit-profile-form__name-error"
+              >Por favor, rellena este campo</span
+            >
+            <label class="popup__field" for="edit-profile-form__description">
+              <input
+                class="popup__input popup__input_type_description"
+                id="edit-profile-form__description"
+                name="description"
+                placeholder="Acerca de mí"
+                type="text"
+                minlength="2"
+                maxlength="200"
+                required
+            /></label>
+            <span class="popup__error" id="edit-profile-form__description-error"
+              >Por favor, introduce una dirección web</span
+            >
             <button class="button popup__button" type="submit">Guardar</button>
           </form>
         </div>
@@ -95,20 +111,29 @@
           ></button>
           <h3 class="popup__title">Nuevo lugar</h3>
           <form class="popup__form" id="new-card-form">
-            <input
-              class="popup__input popup__input_type_card-name"
-              name="place-name"
-              placeholder="Título"
-              required
-              type="text"
-            />
-            <input
-              class="popup__input popup__input_type_url"
-              name="link"
-              placeholder="Enlace a la imagen"
-              required
-              type="url"
-            />
+            <label class="popup__field" for="new-card-form__place-name">
+              <input
+                class="popup__input popup__input_type_card-name"
+                id="new-card-form__place-name"
+                name="place-name"
+                placeholder="Título"
+                required
+                type="text"
+            /></label>
+            <span
+              class="popup__error"
+              id="new-card-form__place-name-error"
+            ></span>
+            <label class="popup__field" for="new-card-form__link">
+              <input
+                class="popup__input popup__input_type_url"
+                id="new-card-form__link"
+                name="link"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+            /></label>
+            <span class="popup__error" id="new-card-form__link-error"></span>
             <button class="button popup__button" type="submit">Crear</button>
           </form>
         </div>

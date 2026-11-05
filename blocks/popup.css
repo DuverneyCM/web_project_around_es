@@ -117,6 +117,33 @@
   margin: 0;
 }
 
+.popup__field {
+  position: relative;
+}
+
+.popup__error {
+  font-size: 12px;
+  line-height: 100%;
+  font-weight: 400;
+  color: #f00;
+  display: none;
+}
+
+.popup__error_visible {
+  display: block;
+}
+
+.popup__input_type_error {
+  border-bottom: 2px solid red;
+}
+
+.popup__button:disabled {
+  background: rgba(0, 0, 0, 0);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
 @media screen and (max-width: 544px) {
   .popup {
     bottom: 112px;

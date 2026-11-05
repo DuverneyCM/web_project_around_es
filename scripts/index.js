@@ -44,6 +44,7 @@ function openModal(modal) {
 }
 function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
+  removeHandleCheckFormValidity(modal);
 }
 function fillProfileForm() {
   nameInputFormEditPopup.value = profileTitle.textContent;
@@ -52,6 +53,7 @@ function fillProfileForm() {
 function handleOpenEditModal() {
   fillProfileForm();
   openModal(editPopup);
+  addHandleCheckFormValidity(formEditPopup);
 }
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -93,14 +95,20 @@ function checkInputValidity({ target: input }, form) {
   }
   toggleButtonState(form); //checkear en el input o en el form?
 }
-function checkFormValidity(form) {
+function addHandleCheckFormValidity(form) {
   const inputs = form.querySelectorAll(".popup__input");
   inputs.forEach((input) => {
-    input.addEventListener("input", (e) => checkInputValidity(e, form));
+    checkInputValidity({ target: input }, form);
+    input._checkValidityHandler = (e) => checkInputValidity(e, form);
+    input.addEventListener("input", input._checkValidityHandler);
   });
 }
-
-checkFormValidity(formEditPopup);
+function removeHandleCheckFormValidity(form) {
+  const inputs = form.querySelectorAll(".popup__input");
+  inputs.forEach((input) => {
+    input.removeEventListener("input", input._checkValidityHandler);
+  });
+}
 
 // Generate Cards Dinamically
 const cardTemplate = document.querySelector("#card-template");
@@ -154,6 +162,14 @@ closeButtonImagePopup.addEventListener("click", () => {
   closeModal(cardImagePopup);
 });
 
+//close the image popup with click outside
+cardImagePopup.addEventListener("click", (e) => {
+  closeModalWithClickOutside(e, cardImagePopup);
+});
+function closeModalWithClickOutside(event, modal) {
+  if (event.target.id === modal.id) closeModal(modal);
+}
+
 // Add new cards' pop-up
 const profileAddButton = document.querySelector(".profile__add-button");
 const newCardPopup = document.querySelector("#new-card-popup");
@@ -169,9 +185,11 @@ const urlInputFormNewCardPopup = formNewCardPopup.querySelector(
 profileAddButton.addEventListener("click", handleOpenNewCardModal); //
 function handleOpenNewCardModal() {
   openModal(newCardPopup);
+  addHandleCheckFormValidity(formNewCardPopup);
 }
 closeButtonNewCardPopup.addEventListener("click", handleCloseNewCardModal); //
 function handleCloseNewCardModal() {
+  formNewCardPopup.reset();
   closeModal(newCardPopup);
 }
 formNewCardPopup.addEventListener("submit", handleCardFormSubmit);

@@ -110,15 +110,17 @@
             type="button"
           ></button>
           <h3 class="popup__title">Nuevo lugar</h3>
-          <form class="popup__form" id="new-card-form">
+          <form class="popup__form" id="new-card-form" novalidate>
             <label class="popup__field" for="new-card-form__place-name">
               <input
                 class="popup__input popup__input_type_card-name"
                 id="new-card-form__place-name"
                 name="place-name"
                 placeholder="Título"
-                required
                 type="text"
+                minlength="2"
+                maxlength="30"
+                required
             /></label>
             <span
               class="popup__error"
@@ -130,8 +132,8 @@
                 id="new-card-form__link"
                 name="link"
                 placeholder="Enlace a la imagen"
-                required
                 type="url"
+                required
             /></label>
             <span class="popup__error" id="new-card-form__link-error"></span>
             <button class="button popup__button" type="submit">Crear</button>

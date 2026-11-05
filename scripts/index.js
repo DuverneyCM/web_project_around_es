@@ -201,3 +201,12 @@ function handleCardFormSubmit(evt) {
   closeModal(newCardPopup);
   formNewCardPopup.reset();
 }
+
+// close popup when press esc
+document.addEventListener("keydown", handleEscClose);
+function handleEscClose(event) {
+  if (event.key !== "Escape") return;
+
+  const openedPopup = document.querySelector(".popup_is-opened");
+  if (openedPopup) closeModal(openedPopup);
+}

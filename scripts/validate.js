@@ -25,12 +25,13 @@ function checkInputValidity({ target: input }, form) {
   } else {
     hideInputError(input);
   }
+  toggleButtonState(form);
 }
 function addHandleCheckFormValidity(form) {
   //setEventListeners
+  toggleButtonState(form);
   const inputs = form.querySelectorAll(".popup__input");
   inputs.forEach((input) => {
-    toggleButtonState(form);
     input._checkValidityHandler = (e) => checkInputValidity(e, form);
     input.addEventListener("input", input._checkValidityHandler);
   });

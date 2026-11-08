@@ -20,18 +20,17 @@ function toggleButtonState(form) {
   submitButton.disabled = !allValidInput;
 }
 function checkInputValidity({ target: input }, form) {
-  if (!input.validity.valid && input.value.length > 0) {
+  if (!input.validity.valid) {
     showInputError(input, input.validationMessage);
   } else {
     hideInputError(input);
   }
-  toggleButtonState(form); //checkear en el input o en el form?
 }
 function addHandleCheckFormValidity(form) {
   //setEventListeners
   const inputs = form.querySelectorAll(".popup__input");
   inputs.forEach((input) => {
-    checkInputValidity({ target: input }, form);
+    toggleButtonState(form);
     input._checkValidityHandler = (e) => checkInputValidity(e, form);
     input.addEventListener("input", input._checkValidityHandler);
   });

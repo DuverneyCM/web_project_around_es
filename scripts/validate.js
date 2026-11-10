@@ -17,7 +17,7 @@ function toggleButtonState(form) {
   const allValidInput = Array.from(inputs).every(
     (input) => input.validity.valid,
   );
-  submitButton.disabled = !allValidInput;
+  if (submitButton) submitButton.disabled = !allValidInput;
 }
 function checkInputValidity({ target: input }, form) {
   if (!input.validity.valid) {
